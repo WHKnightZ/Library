@@ -1,8 +1,8 @@
 #ifndef GL_TEXTURE_H
 #define GL_TEXTURE_H
 
-#include "process_image.h"
-#include <GL/glut.h>
+//#include "process_image.h"
+//#include <GL/glut.h>
 
 typedef struct Rect {
     float Left, Right, Bottom, Top;

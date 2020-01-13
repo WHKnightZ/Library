@@ -163,3 +163,44 @@ void Mix_Image(Image *BG, Image *FG, int x, int y) {
         img1 += (w_BG - w_FG) * 4;
     }
 }
+
+void Mix_Image_Color(Image *BG, Image *FG, int x, int y, unsigned char color[]) {
+    int i, j, w_BG = BG->w, w_FG = FG->w, h_FG = FG->h;
+    Image_Data img1 = BG->img + w_BG * 4 * y + x * 4, img2 = FG->img;
+    unsigned char tmp;
+    for (i = 0; i < h_FG; i++) {
+        for (j = 0; j < w_FG; j++) {
+            tmp = img1[3];
+            img1[3] = img1[3] + img2[3] - img1[3] * img2[3] / 255;
+            if (img1[3] != 0) {
+                img1[0] = (color[0] * img2[3] + img1[0] * tmp * (255 - img2[3]) / 255) / img1[3];
+                img1[1] = (color[1] * img2[3] + img1[1] * tmp * (255 - img2[3]) / 255) / img1[3];
+                img1[2] = (color[2] * img2[3] + img1[2] * tmp * (255 - img2[3]) / 255) / img1[3];
+            } else {
+                img1[0] = color[0];
+                img1[1] = color[1];
+                img1[2] = color[2];
+            }
+            img1[3] = img1[3] * color[3] / 255;
+            img1 += 4;
+            img2 += 4;
+        }
+        img1 += (w_BG - w_FG) * 4;
+    }
+}
+
+void Mix_Image_Color_NoBG(Image *BG, Image *FG, int x, int y, unsigned char color[]) {
+    int i, j, w_BG = BG->w, w_FG = FG->w, h_FG = FG->h;
+    Image_Data img1 = BG->img + w_BG * 4 * y + x * 4, img2 = FG->img;
+    for (i = 0; i < h_FG; i++) {
+        for (j = 0; j < w_FG; j++) {
+            img1[0] = color[0];
+            img1[1] = color[1];
+            img1[2] = color[2];
+            img1[3] = color[3] * img2[3] / 255;
+            img1 += 4;
+            img2 += 4;
+        }
+        img1 += (w_BG - w_FG) * 4;
+    }
+}

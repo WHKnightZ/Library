@@ -20,6 +20,8 @@ void Rotate_180(Image *Source, Image *Dest);
 void Rotate_Left(Image *Source, Image *Dest);
 void Rotate_Right(Image *Source, Image *Dest);
 void Mix_Image(Image *BG, Image *FG, int x, int y);
+void Mix_Image_Color(Image *BG, Image *FG, int x, int y, unsigned char color[]);
+void Mix_Image_Color_NoBG(Image *BG, Image *FG, int x, int y, unsigned char color[]);
 
 #include "process_image.c"
 
