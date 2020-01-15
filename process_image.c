@@ -164,6 +164,22 @@ void Mix_Image(Image *BG, Image *FG, int x, int y) {
     }
 }
 
+void Mix_Image_NoBG(Image *BG, Image *FG, int x, int y) {
+    int i, j, w_BG = BG->w, w_FG = FG->w, h_FG = FG->h;
+    Image_Data img1 = BG->img + w_BG * 4 * y + x * 4, img2 = FG->img;
+    for (i = 0; i < h_FG; i++) {
+        for (j = 0; j < w_FG; j++) {
+            img1[0] = img2[0];
+            img1[1] = img2[1];
+            img1[2] = img2[2];
+            img1[3] = img2[3];
+            img1 += 4;
+            img2 += 4;
+        }
+        img1 += (w_BG - w_FG) * 4;
+    }
+}
+
 void Mix_Image_Color(Image *BG, Image *FG, int x, int y, unsigned char color[]) {
     int i, j, w_BG = BG->w, w_FG = FG->w, h_FG = FG->h;
     Image_Data img1 = BG->img + w_BG * 4 * y + x * 4, img2 = FG->img;
