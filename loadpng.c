@@ -1,5 +1,5 @@
 void Swap_Image(unsigned char *img, unsigned w, unsigned h) {
-    int i, j, h2 = h / 2, h3 = h - 1, w2 = w * 4;
+    unsigned i, j, h2 = h / 2, h3 = h - 1, w2 = w * 4;
     unsigned char *tmp, *tmp2, t;
     for (i = 0; i < h2; ++i) {
         tmp = img + i * w2;

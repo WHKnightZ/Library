@@ -11,6 +11,7 @@ typedef struct Image {
 } Image;
 
 void Create_Image(Image *Img, int w, int h);
+void Create_Image_Color(Image *Img, int w, int h, unsigned char color[]);
 void Delete_Image(Image *Img);
 void Clone_Image(Image *Source, Image *Dest);
 void Crop_Image(Image *Source, Image *Dest, int x, int y, int w, int h);

@@ -33,4 +33,17 @@ void Draw_Rect(Rect *Rct) {
     glEnd();
 }
 
+//void Draw_Rect(Rect *Rct) {
+//    glBegin(GL_POLYGON);
+//    glTexCoord2f(0.0f, 0.0f);
+//    glVertex2f(Rct->Left, Rct->Bottom);
+//    glTexCoord2f(1.0f, 0.0f);
+//    glVertex2f(Rct->Right, Rct->Bottom);
+//    glTexCoord2f(1.0f, 1.0f);
+//    glVertex2f(Rct->Right, Rct->Top);
+//    glTexCoord2f(0.0f, 1.0f);
+//    glVertex2f(Rct->Left, Rct->Top);
+//    glEnd();
+//}
+
 #endif
