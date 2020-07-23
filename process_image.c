@@ -237,3 +237,40 @@ void Mix_Image_Color_NoBG(Image *BG, Image *FG, int x, int y, unsigned char colo
         img1 += (w_BG - w_FG) * 4;
     }
 }
+
+void Zoom_Image(Image *Img, int Scale) {
+    unsigned w = Img->w, h = Img->h;
+    int Size = w * h;
+    Image_Data img = Img->img, img_save = img;
+    Image_Data img1 = (Image_Data)malloc(Size * Scale * Scale * 4), img2;
+    int i, j, k, x, y, r, g, b, a;
+    int Scale4 = 4 * Scale, element_per_row = w * Scale4, element_per_scale_row = element_per_row * Scale;
+    for (i = 0; i < Size; i++) {
+        x = i % w;
+        y = i / w;
+        r = img[0];
+        g = img[1];
+        b = img[2];
+        a = img[3];
+        img2 = img1 + y * element_per_scale_row + x * Scale4;
+        for (j = 0; j < Scale; j++) {
+            for (k = 0; k < Scale; k++) {
+                img2[0] = r;
+                img2[1] = g;
+                img2[2] = b;
+                img2[3] = a;
+                img2 += 4;
+            }
+            img2 += (element_per_row - Scale4);
+        }
+        img += 4;
+    }
+    free(img_save);
+    Img->img = img1;
+    Img->w = w * Scale;
+    Img->h = h * Scale;
+}
+
+void Blur_Image(Image *Src, Image *Dst, int Radius) {
+
+}

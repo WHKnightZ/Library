@@ -24,6 +24,8 @@ void Mix_Image(Image *BG, Image *FG, int x, int y);
 void Mix_Image_NoBG(Image *BG, Image *FG, int x, int y);
 void Mix_Image_Color(Image *BG, Image *FG, int x, int y, unsigned char color[]);
 void Mix_Image_Color_NoBG(Image *BG, Image *FG, int x, int y, unsigned char color[]);
+void Zoom_Image(Image *Img, int Scale);
+void Blur_Image(Image *Src, Image *Dst, int Radius);
 
 #include "process_image.c"
 
