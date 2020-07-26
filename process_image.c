@@ -42,6 +42,23 @@ void Clone_Image(Image *Source, Image *Dest) {
         *img_d++ = *img_s++;
 }
 
+void Clone_Image_Shadow(Image *Source, Image *Dest, unsigned char color[]) {
+    int i, size = Source->w * Source->h;
+    Dest->w = Source->w;
+    Dest->h = Source->h;
+    Dest->img = (Image_Data)malloc(size*4);
+    Image_Data img_s = Source->img, img_d = Dest->img;
+    unsigned char r=color[0],g=color[1],b=color[2],a=color[3];
+    for (i = 0; i < size; i++){
+    	img_d[0] = r;
+        img_d[1] = g;
+        img_d[2] = b;
+        img_d[3] = a * img_s[3] / 255;
+        img_s += 4;
+        img_d += 4;
+	}
+}
+
 void Crop_Image(Image *Source, Image *Dest, int x, int y, int w, int h) {
     int i, j, w4 = Source->w * 4, start;
     Dest->w = w;

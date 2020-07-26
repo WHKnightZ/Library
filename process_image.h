@@ -14,6 +14,7 @@ void Create_Image(Image *Img, int w, int h);
 void Create_Image_Color(Image *Img, int w, int h, unsigned char color[]);
 void Delete_Image(Image *Img);
 void Clone_Image(Image *Source, Image *Dest);
+void Clone_Image_Shadow(Image *Source, Image *Dest, unsigned char color[]);
 void Crop_Image(Image *Source, Image *Dest, int x, int y, int w, int h);
 void Flip_Horizontal(Image *Source, Image *Dest);
 void Flip_Vertical(Image *Source, Image *Dest);
