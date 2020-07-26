@@ -20,7 +20,8 @@ void Create_Image_Color(Image *Img, int w, int h, unsigned char color[]) {
     int i, size = w * h, size_4 = size * 4;
     Img->img = (Image_Data)malloc(size_4);
     Image_Data img = Img->img;
-    unsigned char color_0 = color[0], color_1 = color[1], color_2 = color[2], color_3 = color[3];
+    unsigned char color_0 = color[0], color_1 = color[1], color_2 = color[2],
+                  color_3 = color[3];
     for (i = 0; i < size; i++) {
         *img++ = color_0;
         *img++ = color_1;
@@ -29,9 +30,7 @@ void Create_Image_Color(Image *Img, int w, int h, unsigned char color[]) {
     }
 }
 
-void Delete_Image(Image *Img) {
-    free(Img->img);
-}
+void Delete_Image(Image *Img) { free(Img->img); }
 
 void Clone_Image(Image *Source, Image *Dest) {
     int i, size = Source->w * Source->h * 4;
@@ -117,7 +116,8 @@ void Rotate_180(Image *Source, Image *Dest) {
 }
 
 void Rotate_Left(Image *Source, Image *Dest) {
-    int i, j, w = Source->w, h = Source->h, h4 = h * 4 + 4, start = (w - 1) * h * 4;
+    int i, j, w = Source->w, h = Source->h, h4 = h * 4 + 4,
+              start = (w - 1) * h * 4;
     Dest->w = h;
     Dest->h = w;
     Dest->img = (Image_Data)malloc(w * h * 4);
@@ -164,9 +164,15 @@ void Mix_Image(Image *BG, Image *FG, int x, int y) {
             tmp = img1[3];
             img1[3] = img1[3] + img2[3] - img1[3] * img2[3] / 255;
             if (img1[3] != 0) {
-                img1[0] = (img2[0] * img2[3] + img1[0] * tmp * (255 - img2[3]) / 255) / img1[3];
-                img1[1] = (img2[1] * img2[3] + img1[1] * tmp * (255 - img2[3]) / 255) / img1[3];
-                img1[2] = (img2[2] * img2[3] + img1[2] * tmp * (255 - img2[3]) / 255) / img1[3];
+                img1[0] = (img2[0] * img2[3] +
+                           img1[0] * tmp * (255 - img2[3]) / 255) /
+                          img1[3];
+                img1[1] = (img2[1] * img2[3] +
+                           img1[1] * tmp * (255 - img2[3]) / 255) /
+                          img1[3];
+                img1[2] = (img2[2] * img2[3] +
+                           img1[2] * tmp * (255 - img2[3]) / 255) /
+                          img1[3];
             } else {
                 img1[0] = img2[0];
                 img1[1] = img2[1];
@@ -195,19 +201,27 @@ void Mix_Image_NoBG(Image *BG, Image *FG, int x, int y) {
     }
 }
 
-void Mix_Image_Color(Image *BG, Image *FG, int x, int y, unsigned char color[]) {
+void Mix_Image_Color(Image *BG, Image *FG, int x, int y,
+                     unsigned char color[]) {
     int i, j, w_BG = BG->w, w_FG = FG->w, h_FG = FG->h;
     Image_Data img1 = BG->img + w_BG * 4 * y + x * 4, img2 = FG->img;
     unsigned char tmp;
-    unsigned char color_0 = color[0], color_1 = color[1], color_2 = color[2], color_3 = color[3];
+    unsigned char color_0 = color[0], color_1 = color[1], color_2 = color[2],
+                  color_3 = color[3];
     for (i = 0; i < h_FG; i++) {
         for (j = 0; j < w_FG; j++) {
             tmp = img1[3];
             img1[3] = img1[3] + img2[3] - img1[3] * img2[3] / 255;
             if (img1[3] != 0) {
-                img1[0] = (color_0 * img2[3] + img1[0] * tmp * (255 - img2[3]) / 255) / img1[3];
-                img1[1] = (color_1 * img2[3] + img1[1] * tmp * (255 - img2[3]) / 255) / img1[3];
-                img1[2] = (color_2 * img2[3] + img1[2] * tmp * (255 - img2[3]) / 255) / img1[3];
+                img1[0] = (color_0 * img2[3] +
+                           img1[0] * tmp * (255 - img2[3]) / 255) /
+                          img1[3];
+                img1[1] = (color_1 * img2[3] +
+                           img1[1] * tmp * (255 - img2[3]) / 255) /
+                          img1[3];
+                img1[2] = (color_2 * img2[3] +
+                           img1[2] * tmp * (255 - img2[3]) / 255) /
+                          img1[3];
             } else {
                 img1[0] = color_0;
                 img1[1] = color_1;
@@ -221,10 +235,12 @@ void Mix_Image_Color(Image *BG, Image *FG, int x, int y, unsigned char color[]) 
     }
 }
 
-void Mix_Image_Color_NoBG(Image *BG, Image *FG, int x, int y, unsigned char color[]) {
+void Mix_Image_Color_NoBG(Image *BG, Image *FG, int x, int y,
+                          unsigned char color[]) {
     int i, j, w_BG = BG->w, w_FG = FG->w, h_FG = FG->h;
     Image_Data img1 = BG->img + w_BG * 4 * y + x * 4, img2 = FG->img;
-    unsigned char color_0 = color[0], color_1 = color[1], color_2 = color[2], color_3 = color[3];
+    unsigned char color_0 = color[0], color_1 = color[1], color_2 = color[2],
+                  color_3 = color[3];
     for (i = 0; i < h_FG; i++) {
         for (j = 0; j < w_FG; j++) {
             img1[0] = color_0;
@@ -244,7 +260,8 @@ void Zoom_Image(Image *Img, int Scale) {
     Image_Data img = Img->img, img_save = img;
     Image_Data img1 = (Image_Data)malloc(Size * Scale * Scale * 4), img2;
     int i, j, k, x, y, r, g, b, a;
-    int Scale4 = 4 * Scale, element_per_row = w * Scale4, element_per_scale_row = element_per_row * Scale;
+    int Scale4 = 4 * Scale, element_per_row = w * Scale4,
+        element_per_scale_row = element_per_row * Scale;
     for (i = 0; i < Size; i++) {
         x = i % w;
         y = i / w;
@@ -271,6 +288,4 @@ void Zoom_Image(Image *Img, int Scale) {
     Img->h = h * Scale;
 }
 
-void Blur_Image(Image *Src, Image *Dst, int Radius) {
-
-}
+void Blur_Image(Image *Src, Image *Dst, int Radius) {}
